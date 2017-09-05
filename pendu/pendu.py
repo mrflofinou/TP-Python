@@ -18,13 +18,13 @@ import fonctions
 
 liste_mots = donnees.liste_mot
 compteur = donnees.nombre_chances                           # nombre de tentatives autorisées
-nbr_hasard = random.randrange(len(donnees.liste_mot))
+nbr_hasard = random.randrange(len(liste_mots))
 mot_hasard = fonctions.mot_hasard(nbr_hasard, liste_mots)
 
 mot_trouve = []                       # On initialise la variable mot_trouve comme une liste
 entree = str()                        # On initialise la variable entree comme une chaine de caractères.
-for lettre in mot_hasard:
-    mot_trouve.append("*")            # On rempli la liste mot_trouve avec des étoiles pour l'affichage
+[mot_trouve.append("*") for lettre in mot_hasard]   # On rempli la liste mot_trouve avec des étoiles pour l'affichage
+
 affichage = "".join(mot_trouve)       # Afin que l'affichage soit propre on affiche une chaine de caractère
 print("Le mot recherché contient {} lettres:\n{}".format(len(mot_hasard), affichage.center(30)))
 
@@ -36,14 +36,12 @@ while mot_trouve != mot_hasard:           # Tant que les deux liste ne sont pas 
     affichage = "".join(mot_trouve)         # Cette affichage permet de montrer uniquement les lettres trouvées dans le mot
     print ("\n",affichage.center(30))
 
-    if entree in mot_hasard:                # Si la lettre est dans le mot alors le compteur ne change pas
-        compteur = compteur
-    else:
+    if entree not in mot_hasard:                # Si la lettre est dans le mot alors le compteur ne change pas
         compteur-= 1                        # Le compteur permet permet de compter le nombre de tentatives restantes
 
     if compteur == 0:                       # Si le compteur est à 0 c'est qu'on épuisé toutes nos tetative
         break                               # Du coup on casse la boucle
     else:                                   # Sinon on affiche le nombre de tentatives restantes
-        print("\nil te reste encore {} essais".format(compteur))
+        print("\nIl te reste encore {} essais".format(compteur))
 
 fonctions.affichage_resultat(mot_hasard, mot_trouve)

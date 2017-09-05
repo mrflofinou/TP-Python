@@ -6,10 +6,8 @@ def mot_hasard(nbr_hasard, liste_mots):
     afin de pouvoir faire des comparaison avec d'autres listes
     Cette fonction renvoie le mot au hasard à deviner sous forme de liste
     """
-    for i, mot in enumerate(liste_mots):
-        if i==nbr_hasard:
-            mot_hasard = mot
-    mot_hasard = list(mot_hasard)         # transforme la chaine de caractère en liste afin de pouvoir faire des comparaison avec la liste mot_trouve
+
+    mot_hasard = list(liste_mots[nbr_hasard])         # transforme la chaine de caractère en liste afin de pouvoir faire des comparaison avec la liste mot_trouve
     return mot_hasard
 
 def choix_lettre():
@@ -17,11 +15,11 @@ def choix_lettre():
     Cette fonction permet de récupérer la lettre choisie par le joueur
     """
     entree = input("\nTapez une lettre: ")
-    entree = entree.lower()
     if len(entree)>1 or not entree.isalpha():
         print("Vous n'avez pas saisi une lettre valide.")
         return choix_lettre()
     else:
+        entree = entree.lower()
         return entree
 
 def affichage_resultat(mot_hasard, mot_trouve):
